@@ -5,7 +5,7 @@ class HTTPRequest:
         self._status_code = 200
         self._request_type = None
         self._path = None
-        self._http_version = None
+        self._http_version = "HTTP/1.1"
         self._headers = {}
         self._is_valid = False
         self._parse()

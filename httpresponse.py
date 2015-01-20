@@ -14,7 +14,8 @@ class HTTPResponse:
                 200: "OK",
                 404: "Not Found",
                 400: "Bad Request",
-                500: "Internal Server Error"
+                500: "Internal Server Error",
+                301: "Moved Permanently"
             }
 
     __HTML_BODY = "<HTML><BODY><H2>{0}</H2></BODY></HTML>"
@@ -65,9 +66,14 @@ class HTTPResponse:
         size = 0
 
         if request.is_valid and self.path_exists:
-            code = 200
-            with open (self.path, "r") as input_file:
-                content=input_file.read().replace('\n', '')
+            if os.path.isdir(self.path):
+                code = 301
+                return "{0} {1} {2} \r\nLocation: {3}\r\n\r\n".format(
+                        request.http_version,code,self.__CODE_MAP[code],request.path + os.path.sep)
+            else:
+                code = 200
+                with open (self.path, "r") as input_file:
+                    content=input_file.read().replace('\n', '')
         elif request.is_valid and not self.path_exists:
             code = 404
         elif not request.is_valid:
@@ -75,7 +81,7 @@ class HTTPResponse:
         else:
             code = 500
 
-        if code >= 300:
+        if code >= 400:
             content = self.__HTML_BODY.format(self.__CODE_MAP[code])
 
         size = len(content)
@@ -105,6 +111,7 @@ class HTTPResponse:
                 req_file = req_file + os.path.sep + "index.html"
 
             self._path = req_file
+            print req_file
 
 
 
