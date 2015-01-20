@@ -10,12 +10,17 @@ Make a simple webserver.
 Contributors / Licensing
 ========================
 
-Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
+Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle and
+Chris Pavlicek
 
 server.py contains contributions from:
 
 * Abram Hindle
 * Eddie Antonio Santos
+* Chris Pavlicek
+
+httrequest.py and httpresponse.py contains contributions from:
+
 * Chris Pavlicek
 
 But the server.py example is derived from the python documentation
