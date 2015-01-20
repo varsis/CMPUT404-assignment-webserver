@@ -34,7 +34,8 @@ class MyWebServer(SocketServer.BaseRequestHandler):
     def handle(self):
         request = self.httprequest
         response = HTTPResponse(request)
-        self.request.sendall("OK")
+        print (response.response)
+        self.request.sendall(response.response)
 
     def setup(self):
         #Convert the self.request to a HttpRequest

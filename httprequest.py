@@ -1,4 +1,5 @@
 class HTTPRequest:
+
     def __init__(self, rawText):
         self._raw = rawText;
         self._status_code = 200
