@@ -3,7 +3,7 @@ import SocketServer
 from httprequest import HTTPRequest
 from httpresponse import HTTPResponse
 import io
-# Copyright 2013 Abram Hindle, Eddie Antonio Santos
+# Copyright 2013 Abram Hindle, Eddie Antonio Santos, Chris Pavlicek
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,13 +34,11 @@ class MyWebServer(SocketServer.BaseRequestHandler):
     def handle(self):
         request = self.httprequest
         response = HTTPResponse(request)
-        print (response.response)
         self.request.sendall(response.response)
 
     def setup(self):
         #Convert the self.request to a HttpRequest
         self.data = self.request.recv(1024)
-        print (self.data)
         self.httprequest = HTTPRequest(self.data)
 
 if __name__ == "__main__":
